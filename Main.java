@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class Main {
@@ -9,11 +10,13 @@ public class Main {
 	String [] projects= new String []{"a","b","c","d","e","f"};
     String[][] dependencies=new String[][]{{"a","d"},{"f","b"},{"b","d"},{"f","a"},{"d","c"}};
 
+
         System.out.println("Order: "+ Order(projects,dependencies));
     }
 
     public static List<String> Order(String[] projects, String[][] dependencies) {
         List<String> results=new ArrayList<>();
+
         int length= dependencies.length;
         int loop=0;
         for(String project: projects){
@@ -27,13 +30,13 @@ public class Main {
             }
             loop=0;
         }
-        for(int i=0;i<results.size();i++){
+        for(int i=1;i<results.size();i++){
             for(String[] dependency: dependencies){
-                if(results.get(i).equals(dependency[0])){
+                    if(!results.contains(dependency[1]))
                     results.add(dependency[1]);
                 }
             }
-        }
+
         return results;
     }
 
